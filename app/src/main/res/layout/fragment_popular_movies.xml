@@ -50,7 +50,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/error_icon"/>
+        android:src="@drawable/error_icon"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/errorTextView"
@@ -65,7 +66,8 @@
         android:textColor="@color/my_blue"
         android:layout_marginTop="14dp"
         android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"/>
+        android:layout_marginEnd="40dp"
+        android:visibility="gone"/>
     
     <Button
         android:id="@+id/errorRepeatButton"
@@ -78,6 +80,7 @@
         android:text="@string/error_repeat"
         android:textAllCaps="false"
         android:layout_marginTop="36dp"
-        android:background="@drawable/button_background"/>
+        android:background="@drawable/button_background"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
