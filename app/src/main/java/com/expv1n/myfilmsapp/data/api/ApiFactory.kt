@@ -31,6 +31,7 @@ class ApiFactory {
 
 
     companion object {
+        const val TOKEN = "d4c76bf0-6450-4e4a-a639-8e68e62771f3"
         private const val BASE_URL = "https://kinopoiskapiunofficial.tech/"
     }
 }

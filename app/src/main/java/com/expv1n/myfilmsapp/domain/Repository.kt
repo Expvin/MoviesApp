@@ -1,8 +1,10 @@
 package com.expv1n.myfilmsapp.domain
 
+import com.expv1n.myfilmsapp.domain.models.Film
+
 interface Repository {
 
-    suspend fun getPopularMovies()
+    suspend fun getPopularMovies(): List<Film>
 
     suspend fun getFavoriteMovies()
 

@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">MyFilmsApp</string>
     <string name="api_key">d4c76bf0-6450-4e4a-a639-8e68e62771f3</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_hint">Поиск</string>
     <string name="popular_hint">Популярное</string>
     <string name="error_text">Произошла ошибка при загрузке данных, проверьте подключение к сети</string>
     <string name="error_repeat">Повторить</string>
+    <string name="favorite">Избранное</string>
+    <string name="popular">Популярные</string>
 </resources>

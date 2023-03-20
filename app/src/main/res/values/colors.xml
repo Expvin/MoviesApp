@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="my_blue">#0094FF</color>
     <color name="my_black">#000000</color>
+    <color name="my_favorite_btn">#DEEFFF</color>
 </resources>
