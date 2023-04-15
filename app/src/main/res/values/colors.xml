@@ -10,4 +10,5 @@
     <color name="my_blue">#0094FF</color>
     <color name="my_black">#000000</color>
     <color name="my_favorite_btn">#DEEFFF</color>
+    <color name="my_text_color">#81000000</color>
 </resources>
