@@ -6,13 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.expv1n.myfilmsapp.data.RepositoryImpl
 import com.expv1n.myfilmsapp.domain.models.Film
-import com.expv1n.myfilmsapp.domain.usecase.GetPopularMovies
+import com.expv1n.myfilmsapp.domain.usecase.GetPopularMoviesUseCase
 import kotlinx.coroutines.launch
 
 class PopularMoviesViewModel(): ViewModel() {
 
     private val repository = RepositoryImpl()
-    private val getPopularMoviesUC = GetPopularMovies(repository)
+    private val getPopularMoviesUseCaseUC = GetPopularMoviesUseCase(repository)
 
     private val _getPopularLiveData = MutableLiveData<List<Film>>()
     val getPopularLiveData: LiveData<List<Film>>
@@ -21,7 +21,7 @@ class PopularMoviesViewModel(): ViewModel() {
 
     suspend fun getPopularMovies() {
         viewModelScope.launch {
-            _getPopularLiveData.postValue(getPopularMoviesUC.invoke())
+            _getPopularLiveData.postValue(getPopularMoviesUseCaseUC.invoke())
         }
     }
 }

@@ -9,6 +9,8 @@ import com.bumptech.glide.Glide
 import com.expv1n.myfilmsapp.databinding.FragmentDetailedInfoBinding
 import com.expv1n.myfilmsapp.domain.models.Film
 
+
+//TODO Показать ProgressBar загрузки
 class DetailedInfoFragment : Fragment() {
 
     private var _binding: FragmentDetailedInfoBinding? = null
@@ -52,6 +54,10 @@ class DetailedInfoFragment : Fragment() {
                 countriesMovieTextView.text = it.countries.toString()
             }
         }
+    }
+
+    private fun getFilmId(film: Film) {
+
     }
 
     companion object {

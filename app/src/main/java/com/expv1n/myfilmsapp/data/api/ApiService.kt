@@ -1,5 +1,6 @@
 package com.expv1n.myfilmsapp.data.api
 
+import com.expv1n.myfilmsapp.domain.models.FilmDetail
 import com.expv1n.myfilmsapp.domain.models.Movies
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -14,7 +15,10 @@ interface ApiService {
         @Header("X-API-KEY") token: String,
         @Query("page") page: Int): Movies
 
+    @Headers("Content-Type: application/json")
+    @GET("api/v2.2/films/")
+    suspend fun getDetailFilm(
+        @Header("X-API-KEY") token: String,
+        @Query("id") idFilm: Long): FilmDetail
 
-    //Response film detail
-    ///api/v2.2/films/top/<id фильма>
 }
