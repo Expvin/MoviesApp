@@ -1,13 +1,22 @@
 package com.expv1n.myfilmsapp.presentation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.expv1n.myfilmsapp.databinding.FragmentDetailedInfoBinding
 import com.expv1n.myfilmsapp.domain.models.Film
+import com.expv1n.myfilmsapp.domain.models.FilmDetail
+import com.expv1n.myfilmsapp.presentation.viewmodel.DetailInfoViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 //TODO Показать ProgressBar загрузки
@@ -17,11 +26,14 @@ class DetailedInfoFragment : Fragment() {
     private val binding: FragmentDetailedInfoBinding
         get() = _binding ?: throw RuntimeException("Unknown binding")
 
-    private lateinit var film: Film
-
+    private val viewModel by lazy {
+        ViewModelProvider(this)[DetailInfoViewModel::class.java]
+    }
+    private val coroutineScope = CoroutineScope(Dispatchers.Main)
+    private var movieDetails: FilmDetail? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        parseFilm()
+        getMovieDetails()
     }
 
     override fun onCreateView(
@@ -29,7 +41,6 @@ class DetailedInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetailedInfoBinding.inflate(layoutInflater, container, false)
-        settingViewValue();
         return binding.root
     }
 
@@ -38,26 +49,34 @@ class DetailedInfoFragment : Fragment() {
         _binding = null
     }
 
-    private fun parseFilm() {
+    private fun parseFilm(): Long {
         requireArguments().getParcelable<Film>(PARSE_KEY)?.let {
-            film = it
+            return it.filmId.toLong()
         }
+        return -1
     }
 
     private fun settingViewValue() {
-        film.let {
+        movieDetails?.let {
             binding.apply {
-                Glide.with(requireActivity()).load(film.posterUrl).into(titleImageView)
+                Glide.with(requireActivity()).load(movieDetails!!.posterUrl).into(titleImageView)
                 titleMovieTextView.text = it.nameRu
-                descriptionMovieTextView.text = it.nameEn
+                descriptionMovieTextView.text = it.description
                 genresMovieTextView.text = it.genres.toString()
                 countriesMovieTextView.text = it.countries.toString()
             }
         }
     }
 
-    private fun getFilmId(film: Film) {
-
+    private fun getMovieDetails() {
+        val filmId = parseFilm()
+        coroutineScope.async {
+            viewModel.getDetailInfo(filmId)
+            viewModel.getDetailFilmLiveData.observe(requireActivity()) {
+                movieDetails = it
+                settingViewValue();
+            }
+        }
     }
 
     companion object {

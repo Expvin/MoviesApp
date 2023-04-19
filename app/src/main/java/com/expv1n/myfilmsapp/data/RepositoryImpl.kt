@@ -1,5 +1,6 @@
 package com.expv1n.myfilmsapp.data
 
+import android.util.Log
 import com.expv1n.myfilmsapp.data.api.ApiFactory
 import com.expv1n.myfilmsapp.domain.Repository
 import com.expv1n.myfilmsapp.domain.models.Film
@@ -25,7 +26,7 @@ class RepositoryImpl: Repository {
     }
 
     override suspend fun getDetailFilm(filmId: Long): FilmDetail {
-        return apiService.getDetailFilm(ApiFactory.TOKEN, filmId)
+        return apiService.getDetailFilm(ApiFactory.TOKEN)
     }
 
 }
