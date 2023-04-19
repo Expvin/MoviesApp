@@ -95,15 +95,19 @@ class DetailedInfoFragment : Fragment() {
         }
         return result.toString()
     }
-    private fun getMovieDetails() {
-        val filmId = parseFilm()
-        coroutineScope.async {
-            viewModel.getDetailInfo(filmId)
-            viewModel.getDetailFilmLiveData.observe(requireActivity()) {
-                movieDetails = it
-                settingViewValue();
-            }
-        }
+//    private fun getMovieDetails() {
+//        val filmId = parseFilm()
+//        coroutineScope.async {
+//            viewModel.getDetailInfo(filmId)
+//            viewModel.stateDetail.observe(requireActivity()) {
+//                movieDetails = it
+//                settingViewValue();
+//            }
+//        }
+//    }
+    // Sealed classes lesson3
+    private fun observeViewModel() {
+
     }
 
     companion object {
