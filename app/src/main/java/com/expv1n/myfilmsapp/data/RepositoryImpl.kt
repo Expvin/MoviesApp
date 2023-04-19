@@ -26,7 +26,7 @@ class RepositoryImpl: Repository {
     }
 
     override suspend fun getDetailFilm(filmId: Long): FilmDetail {
-        return apiService.getDetailFilm(ApiFactory.TOKEN)
+        return apiService.getDetailFilm(ApiFactory.TOKEN, filmId.toString())
     }
 
 }

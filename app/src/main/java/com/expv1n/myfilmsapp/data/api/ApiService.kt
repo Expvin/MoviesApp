@@ -5,6 +5,7 @@ import com.expv1n.myfilmsapp.domain.models.Movies
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Headers
+import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.QueryName
 
@@ -17,9 +18,9 @@ interface ApiService {
         @Query("page") page: Int): Movies
 
     @Headers("Content-Type: application/json")
-    @GET("api/v2.2/films/515")
+    @GET("api/v2.2/films/{id}")
     suspend fun getDetailFilm(
         @Header("X-API-KEY") token: String,
-        ): FilmDetail
+        @Path("id") id: String): FilmDetail
 
 }
