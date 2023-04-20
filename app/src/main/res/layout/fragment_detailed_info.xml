@@ -98,7 +98,7 @@
             android:backgroundTint="@color/my_blue"
             android:indeterminate="true"
             android:indeterminateDrawable="@drawable/progress_bar_background"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
 
         <ImageView
             android:id="@+id/errorImageView"

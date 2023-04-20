@@ -1,5 +1,6 @@
 package com.expv1n.myfilmsapp.presentation
 
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,9 @@ import com.expv1n.myfilmsapp.domain.models.Country
 import com.expv1n.myfilmsapp.domain.models.Film
 import com.expv1n.myfilmsapp.domain.models.FilmDetail
 import com.expv1n.myfilmsapp.domain.models.Genre
+import com.expv1n.myfilmsapp.presentation.state.DetailError
+import com.expv1n.myfilmsapp.presentation.state.DetailProgress
+import com.expv1n.myfilmsapp.presentation.state.DetailResult
 import com.expv1n.myfilmsapp.presentation.viewmodel.DetailInfoViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +23,7 @@ import kotlinx.coroutines.async
 import java.lang.StringBuilder
 
 
-//TODO Показать ProgressBar загрузки
+
 class DetailedInfoFragment : Fragment() {
 
     private var _binding: FragmentDetailedInfoBinding? = null
@@ -30,10 +34,9 @@ class DetailedInfoFragment : Fragment() {
         ViewModelProvider(this)[DetailInfoViewModel::class.java]
     }
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
-    private var movieDetails: FilmDetail? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getMovieDetails()
+        observeViewModel()
     }
 
     override fun onCreateView(
@@ -56,10 +59,10 @@ class DetailedInfoFragment : Fragment() {
         return -1
     }
 
-    private fun settingViewValue() {
-        movieDetails?.let {
+    private fun settingViewValue(movieDetails: FilmDetail) {
+        movieDetails.let {
             binding.apply {
-                Glide.with(requireActivity()).load(movieDetails!!.posterUrl).into(titleImageView)
+                Glide.with(requireActivity()).load(movieDetails.posterUrl).into(titleImageView)
                 titleMovieTextView.text = it.nameRu
                 descriptionMovieTextView.text = it.description
                 genresMovieTextView.text = getGenres(it.genres)
@@ -95,19 +98,22 @@ class DetailedInfoFragment : Fragment() {
         }
         return result.toString()
     }
-//    private fun getMovieDetails() {
-//        val filmId = parseFilm()
-//        coroutineScope.async {
-//            viewModel.getDetailInfo(filmId)
-//            viewModel.stateDetail.observe(requireActivity()) {
-//                movieDetails = it
-//                settingViewValue();
-//            }
-//        }
-//    }
-    // Sealed classes lesson3
-    private fun observeViewModel() {
 
+    private fun observeViewModel() {
+        viewModel.getDetailInfo(parseFilm())
+        viewModel.stateDetail.observe(requireActivity()) {
+            when (it) {
+                is DetailError -> {
+
+                }
+                is DetailProgress -> {
+                }
+                is DetailResult -> {
+                    binding.progressBar.visibility = View.GONE
+                    settingViewValue(it.result)
+                }
+            }
+        }
     }
 
     companion object {
