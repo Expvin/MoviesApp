@@ -26,13 +26,15 @@ class DetailInfoViewModel: ViewModel() {
 
     fun getDetailInfo(filmId: Long) {
         _stateDetail.value = DetailProgress
-        if (filmId > 0 || filmId.equals(0)) {
+        if (filmId.toInt() == -1) {
             _stateDetail.value = DetailError
-        }
-        viewModelScope.launch {
-            val deferredResult  = viewModelScope.async(Dispatchers.IO) { getDetailFilm.invoke(filmId) }
-            delay(5000)
-            _stateDetail.value = DetailResult(deferredResult.await())
+        } else {
+            viewModelScope.launch {
+                val deferredResult =
+                    viewModelScope.async(Dispatchers.IO) { getDetailFilm.invoke(filmId) }
+                delay(5000)
+                _stateDetail.value = DetailResult(deferredResult.await())
+            }
         }
     }
 

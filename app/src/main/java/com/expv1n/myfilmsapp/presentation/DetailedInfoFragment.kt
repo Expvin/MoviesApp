@@ -33,17 +33,13 @@ class DetailedInfoFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProvider(this)[DetailInfoViewModel::class.java]
     }
-    private val coroutineScope = CoroutineScope(Dispatchers.Main)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        observeViewModel()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetailedInfoBinding.inflate(layoutInflater, container, false)
+        observeViewModel()
         return binding.root
     }
 
@@ -104,9 +100,13 @@ class DetailedInfoFragment : Fragment() {
         viewModel.stateDetail.observe(requireActivity()) {
             when (it) {
                 is DetailError -> {
-
+                    binding.progressBar.visibility = View.GONE
+                    binding.errorImageView.visibility = View.VISIBLE
+                    binding.errorTextView.visibility = View.VISIBLE
+                    binding.errorRepeatButton.visibility = View.VISIBLE
                 }
                 is DetailProgress -> {
+                    binding.progressBar.visibility = View.VISIBLE
                 }
                 is DetailResult -> {
                     binding.progressBar.visibility = View.GONE
