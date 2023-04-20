@@ -100,6 +100,7 @@ class DetailedInfoFragment : Fragment() {
         viewModel.stateDetail.observe(requireActivity()) {
             when (it) {
                 is DetailError -> {
+                    //TODO error button
                     binding.progressBar.visibility = View.GONE
                     binding.errorImageView.visibility = View.VISIBLE
                     binding.errorTextView.visibility = View.VISIBLE
