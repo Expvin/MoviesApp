@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.expv1n.myfilmsapp.data.RepositoryImpl
-import com.expv1n.myfilmsapp.domain.models.Film
 import com.expv1n.myfilmsapp.domain.usecase.GetPopularMoviesUseCase
 import com.expv1n.myfilmsapp.presentation.state.PopularError
 import com.expv1n.myfilmsapp.presentation.state.PopularProgress
@@ -13,7 +12,6 @@ import com.expv1n.myfilmsapp.presentation.state.PopularResult
 import com.expv1n.myfilmsapp.presentation.state.PopularState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class PopularMoviesViewModel: ViewModel() {

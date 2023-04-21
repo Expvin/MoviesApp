@@ -14,11 +14,8 @@ import com.expv1n.myfilmsapp.presentation.state.PopularError
 import com.expv1n.myfilmsapp.presentation.state.PopularProgress
 import com.expv1n.myfilmsapp.presentation.state.PopularResult
 import com.expv1n.myfilmsapp.presentation.viewmodel.PopularMoviesViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
-
+//TODO paging lib
 class PopularMoviesFragment : Fragment() {
 
 
@@ -78,11 +75,18 @@ class PopularMoviesFragment : Fragment() {
     private fun launchFragment(film: Film) {
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.mainFragmentContainerView, DetailedInfoFragment.getInstance(film))
-            .addToBackStack(DetailedInfoFragment.FRAGMENT_NAME)
             .commit();
     }
 
     private fun setupAdapter() {
         binding.popularRecyclerView.adapter = adapter
+    }
+
+    companion object {
+
+        const val FRAGMENT_NAME = "PopularMoviesFragment"
+        fun getInstance() = PopularMoviesFragment()
+
+
     }
 }

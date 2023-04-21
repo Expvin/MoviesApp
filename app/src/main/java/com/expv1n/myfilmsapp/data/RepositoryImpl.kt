@@ -1,6 +1,6 @@
 package com.expv1n.myfilmsapp.data
 
-import android.util.Log
+
 import com.expv1n.myfilmsapp.data.api.ApiFactory
 import com.expv1n.myfilmsapp.domain.Repository
 import com.expv1n.myfilmsapp.domain.models.Film
@@ -10,7 +10,8 @@ class RepositoryImpl: Repository {
 
     val apiService = ApiFactory().apiService
     override suspend fun getPopularMovies(): List<Film> {
-        return apiService.getPopularMovies(ApiFactory.TOKEN, 1).films
+        val result = apiService.getPopularMovies(page = 1).pagesCount
+        return apiService.getPopularMovies(page = 1).films
     }
 
     override suspend fun getFavoriteMovies() {
@@ -26,7 +27,7 @@ class RepositoryImpl: Repository {
     }
 
     override suspend fun getDetailFilm(filmId: Long): FilmDetail {
-        return apiService.getDetailFilm(ApiFactory.TOKEN, filmId.toString())
+        return apiService.getDetailFilm(id = filmId.toString())
     }
 
 }

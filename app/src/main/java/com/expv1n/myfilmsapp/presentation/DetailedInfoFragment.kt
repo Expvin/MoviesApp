@@ -1,6 +1,5 @@
 package com.expv1n.myfilmsapp.presentation
 
-import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.expv1n.myfilmsapp.R
 import com.expv1n.myfilmsapp.databinding.FragmentDetailedInfoBinding
 import com.expv1n.myfilmsapp.domain.models.Country
 import com.expv1n.myfilmsapp.domain.models.Film
@@ -17,9 +17,6 @@ import com.expv1n.myfilmsapp.presentation.state.DetailError
 import com.expv1n.myfilmsapp.presentation.state.DetailProgress
 import com.expv1n.myfilmsapp.presentation.state.DetailResult
 import com.expv1n.myfilmsapp.presentation.viewmodel.DetailInfoViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import java.lang.StringBuilder
 
 
@@ -40,6 +37,7 @@ class DetailedInfoFragment : Fragment() {
     ): View {
         _binding = FragmentDetailedInfoBinding.inflate(layoutInflater, container, false)
         observeViewModel()
+        setOnClickListener()
         return binding.root
     }
 
@@ -117,13 +115,24 @@ class DetailedInfoFragment : Fragment() {
         }
     }
 
+    private fun launchFragment() {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.mainFragmentContainerView, PopularMoviesFragment.getInstance())
+            .commit()
+    }
+
+    private fun setOnClickListener() {
+        binding.backImageButton.setOnClickListener {
+            launchFragment()
+        }
+    }
     companion object {
         const val PARSE_KEY = "DetailedInfoFragment"
         const val FRAGMENT_NAME = "DetailedInfoFragment"
-        fun getInstance(movie: Film): DetailedInfoFragment {
+        fun getInstance(film: Film): DetailedInfoFragment {
             return DetailedInfoFragment().apply {
                 arguments = Bundle().apply {
-                    putParcelable(PARSE_KEY, movie)
+                    putParcelable(PARSE_KEY, film)
                 }
             }
         }
