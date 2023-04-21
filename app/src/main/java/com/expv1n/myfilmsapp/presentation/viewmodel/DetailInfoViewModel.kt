@@ -32,7 +32,6 @@ class DetailInfoViewModel: ViewModel() {
             viewModelScope.launch {
                 val deferredResult =
                     viewModelScope.async(Dispatchers.IO) { getDetailFilm.invoke(filmId) }
-                delay(5000)
                 _stateDetail.value = DetailResult(deferredResult.await())
             }
         }

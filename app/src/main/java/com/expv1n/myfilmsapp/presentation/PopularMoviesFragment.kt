@@ -10,6 +10,9 @@ import com.expv1n.myfilmsapp.R
 import com.expv1n.myfilmsapp.databinding.FragmentPopularMoviesBinding
 import com.expv1n.myfilmsapp.domain.models.Film
 import com.expv1n.myfilmsapp.presentation.adapter.MovieAdapter
+import com.expv1n.myfilmsapp.presentation.state.PopularError
+import com.expv1n.myfilmsapp.presentation.state.PopularProgress
+import com.expv1n.myfilmsapp.presentation.state.PopularResult
 import com.expv1n.myfilmsapp.presentation.viewmodel.PopularMoviesViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +26,6 @@ class PopularMoviesFragment : Fragment() {
     private val binding: FragmentPopularMoviesBinding
         get() = _binding ?: throw RuntimeException("Unknown Binding")
 
-    private val coroutineScope = CoroutineScope(Dispatchers.Main)
     private val viewModel by lazy {
         ViewModelProvider(this)[PopularMoviesViewModel::class.java]
     }
@@ -36,19 +38,10 @@ class PopularMoviesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPopularMoviesBinding.inflate(layoutInflater, container, false)
-        setOnClickListener()
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         setupAdapter()
-        coroutineScope.launch {
-            viewModel.getPopularMovies()
-            viewModel.getPopularLiveData.observe(requireActivity()) {
-                adapter.submitList(it)
-            }
-        }
+        setOnClickListener()
+        observeViewModel()
+        return binding.root
     }
 
     override fun onDestroy() {
@@ -56,6 +49,26 @@ class PopularMoviesFragment : Fragment() {
         _binding = null
     }
 
+    private fun observeViewModel() {
+        viewModel.getPopularMovies()
+        viewModel.getPopularLiveData.observe(requireActivity()) {
+            when(it) {
+                is PopularError -> {
+                    binding.progressBar.visibility = View.GONE
+                    binding.errorImageView.visibility = View.VISIBLE
+                    binding.errorTextView.visibility = View.VISIBLE
+                    binding.errorRepeatButton.visibility = View.VISIBLE
+                }
+                is PopularProgress -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                is PopularResult -> {
+                    binding.progressBar.visibility = View.GONE
+                    adapter.submitList(it.result)
+                }
+            }
+        }
+    }
     private fun setOnClickListener() {
         adapter.onClickListener = {
             launchFragment(it)
