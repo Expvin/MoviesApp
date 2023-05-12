@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.expv1n.myfilmsapp.R
 import com.expv1n.myfilmsapp.databinding.FragmentPopularMoviesBinding
 import com.expv1n.myfilmsapp.domain.models.Film
@@ -14,6 +15,8 @@ import com.expv1n.myfilmsapp.presentation.state.PopularError
 import com.expv1n.myfilmsapp.presentation.state.PopularProgress
 import com.expv1n.myfilmsapp.presentation.state.PopularResult
 import com.expv1n.myfilmsapp.presentation.viewmodel.PopularMoviesViewModel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 //TODO paging lib
 class PopularMoviesFragment : Fragment() {
@@ -61,10 +64,15 @@ class PopularMoviesFragment : Fragment() {
                 }
                 is PopularResult -> {
                     binding.progressBar.visibility = View.GONE
-                    adapter.submitList(it.result)
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        viewModel.getMovies().collectLatest { movies ->
+                            adapter.submitData(movies)
+                        }
+                    }
                 }
             }
         }
+
     }
     private fun setOnClickListener() {
         adapter.onClickListener = {
