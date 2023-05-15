@@ -18,7 +18,6 @@ import com.expv1n.myfilmsapp.presentation.viewmodel.PopularMoviesViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-//TODO paging lib
 class PopularMoviesFragment : Fragment() {
 
 
