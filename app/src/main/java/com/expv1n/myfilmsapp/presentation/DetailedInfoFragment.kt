@@ -19,8 +19,7 @@ import com.expv1n.myfilmsapp.presentation.state.DetailResult
 import com.expv1n.myfilmsapp.presentation.viewmodel.DetailInfoViewModel
 import java.lang.StringBuilder
 
-
-
+// TODO room database and add favorite and delete
 class DetailedInfoFragment : Fragment() {
 
     private var _binding: FragmentDetailedInfoBinding? = null
