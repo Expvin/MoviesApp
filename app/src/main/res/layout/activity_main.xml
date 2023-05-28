@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:name="com.expv1n.myfilmsapp.presentation.PopularMoviesFragment"/>
+        android:name="com.expv1n.myfilmsapp.presentation.PopularMovies.PopularMoviesFragment"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

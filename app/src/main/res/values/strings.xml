@@ -10,4 +10,6 @@
     <string name="desmov">Сопротивление собирает отряд для выполнения особой миссии - надо выкрасть чертежи самого совершенного и мертоносного оружия Империи. Не всем суждено вернуться домой, но герои готовы к этому, ведь на кону судьба Галактики</string>
     <string name="add_to_favorite">Добавить в избранное</string>
     <string name="delete_is_favorite">Удалить из избранного</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

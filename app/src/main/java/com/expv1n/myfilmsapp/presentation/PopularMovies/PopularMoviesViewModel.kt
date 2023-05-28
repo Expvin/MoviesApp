@@ -1,5 +1,7 @@
-package com.expv1n.myfilmsapp.presentation.viewmodel
+package com.expv1n.myfilmsapp.presentation.PopularMovies
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,9 +22,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-class PopularMoviesViewModel: ViewModel() {
+class PopularMoviesViewModel(application: Application): AndroidViewModel(application) {
 
-    private val repository = RepositoryImpl()
+    private val repository = RepositoryImpl(application)
     private val getPopularMoviesUseCaseUC = GetPopularMoviesUseCase(repository)
 
 

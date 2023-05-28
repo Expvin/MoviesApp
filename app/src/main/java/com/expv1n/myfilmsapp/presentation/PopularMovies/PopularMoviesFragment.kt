@@ -1,4 +1,4 @@
-package com.expv1n.myfilmsapp.presentation
+package com.expv1n.myfilmsapp.presentation.PopularMovies
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,11 +10,10 @@ import androidx.lifecycle.lifecycleScope
 import com.expv1n.myfilmsapp.R
 import com.expv1n.myfilmsapp.databinding.FragmentPopularMoviesBinding
 import com.expv1n.myfilmsapp.domain.models.Film
-import com.expv1n.myfilmsapp.presentation.adapter.MovieAdapter
+import com.expv1n.myfilmsapp.presentation.DetailMovie.DetailedInfoFragment
 import com.expv1n.myfilmsapp.presentation.state.PopularError
 import com.expv1n.myfilmsapp.presentation.state.PopularProgress
 import com.expv1n.myfilmsapp.presentation.state.PopularResult
-import com.expv1n.myfilmsapp.presentation.viewmodel.PopularMoviesViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 

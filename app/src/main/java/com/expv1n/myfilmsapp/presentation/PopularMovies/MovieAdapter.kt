@@ -1,9 +1,8 @@
-package com.expv1n.myfilmsapp.presentation.adapter
+package com.expv1n.myfilmsapp.presentation.PopularMovies
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.expv1n.myfilmsapp.databinding.MovieItemBinding

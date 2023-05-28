@@ -17,6 +17,7 @@ class MoviesMapper {
             genre = getGenres(respone.genres),
             country = getCountries(respone.countries),
             posterUrl = respone.posterUrl,
+            year = respone.year.toString(),
             isFavorite = false
         )
     }

@@ -1,4 +1,4 @@
-package com.expv1n.myfilmsapp.presentation.adapter
+package com.expv1n.myfilmsapp.presentation.PopularMovies
 
 import androidx.recyclerview.widget.DiffUtil
 import com.expv1n.myfilmsapp.domain.models.Film

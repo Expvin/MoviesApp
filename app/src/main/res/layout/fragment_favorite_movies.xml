@@ -4,20 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.PopularMovies.PopularMoviesFragment">
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/search_view_background"
-        app:searchIcon="@drawable/search_icon"
-        android:layoutDirection="rtl"
-        android:hint="@string/search_hint"
-        app:queryHint="@string/search_hint"/>
+    tools:context=".presentation.FavoriteMovies.FavoriteMoviesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/popularRecyclerView"
@@ -25,7 +12,7 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_view"
+        app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="70dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
@@ -70,7 +57,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:visibility="gone"/>
-    
+
     <Button
         android:id="@+id/errorRepeatButton"
         android:layout_width="124dp"

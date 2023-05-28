@@ -1,5 +1,7 @@
-package com.expv1n.myfilmsapp.presentation.viewmodel
+package com.expv1n.myfilmsapp.presentation.DetailMovie
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,9 +17,9 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class DetailInfoViewModel: ViewModel() {
+class DetailInfoViewModel(application: Application): AndroidViewModel(application) {
 
-    private val repository = RepositoryImpl()
+    private val repository = RepositoryImpl(application)
     private val getDetailFilm = GetDetailFilmUseCase(repository)
 
     private val _stateDetail = MutableLiveData<DetailState>()

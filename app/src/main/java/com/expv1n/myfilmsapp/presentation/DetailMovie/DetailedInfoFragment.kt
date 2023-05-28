@@ -1,4 +1,4 @@
-package com.expv1n.myfilmsapp.presentation
+package com.expv1n.myfilmsapp.presentation.DetailMovie
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,10 +13,10 @@ import com.expv1n.myfilmsapp.domain.models.Country
 import com.expv1n.myfilmsapp.domain.models.Film
 import com.expv1n.myfilmsapp.domain.models.FilmDetail
 import com.expv1n.myfilmsapp.domain.models.Genre
+import com.expv1n.myfilmsapp.presentation.PopularMovies.PopularMoviesFragment
 import com.expv1n.myfilmsapp.presentation.state.DetailError
 import com.expv1n.myfilmsapp.presentation.state.DetailProgress
 import com.expv1n.myfilmsapp.presentation.state.DetailResult
-import com.expv1n.myfilmsapp.presentation.viewmodel.DetailInfoViewModel
 import java.lang.StringBuilder
 
 // TODO room database and add favorite and delete
