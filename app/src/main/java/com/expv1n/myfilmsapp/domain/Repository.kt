@@ -18,7 +18,7 @@ interface Repository {
 
     suspend fun searchMovies()
 
-    suspend fun getDetailFilm(filmId: Long): FilmDetail
+    suspend fun getDetailMovie(movieId: Long): MovieEntity
 
     suspend fun deleteMovie(movie: MovieEntity)
 }

@@ -86,7 +86,7 @@
         android:visibility="gone"/>
 
     <Button
-        android:id="@+id/popularButton"
+        android:id="@+id/favoriteButton"
         android:layout_width="155dp"
         android:layout_height="45dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -99,7 +99,7 @@
         android:background="@drawable/button_background" />
 
     <Button
-        android:id="@+id/favoriteButton"
+        android:id="@+id/popularButton"
         android:layout_width="155dp"
         android:layout_height="45dp"
         app:layout_constraintStart_toStartOf="parent"

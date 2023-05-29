@@ -11,6 +11,7 @@ import com.expv1n.myfilmsapp.R
 import com.expv1n.myfilmsapp.databinding.FragmentPopularMoviesBinding
 import com.expv1n.myfilmsapp.domain.models.Film
 import com.expv1n.myfilmsapp.presentation.DetailMovie.DetailedInfoFragment
+import com.expv1n.myfilmsapp.presentation.FavoriteMovies.FavoriteMoviesFragment
 import com.expv1n.myfilmsapp.presentation.state.PopularError
 import com.expv1n.myfilmsapp.presentation.state.PopularProgress
 import com.expv1n.myfilmsapp.presentation.state.PopularResult
@@ -39,6 +40,7 @@ class PopularMoviesFragment : Fragment() {
         setupAdapter()
         setOnClickListener()
         observeViewModel()
+        initButton()
         return binding.root
     }
 
@@ -78,10 +80,18 @@ class PopularMoviesFragment : Fragment() {
         }
     }
 
+    private fun initButton() {
+        binding.favoriteButton.setOnClickListener {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.mainFragmentContainerView, FavoriteMoviesFragment.getInstance())
+                .commit();
+        }
+    }
+
     private fun launchFragment(film: Film) {
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.mainFragmentContainerView, DetailedInfoFragment.getInstance(film))
-            .commit();
+            .commit()
     }
 
     private fun setupAdapter() {
@@ -90,7 +100,6 @@ class PopularMoviesFragment : Fragment() {
 
     companion object {
 
-        const val FRAGMENT_NAME = "PopularMoviesFragment"
         fun getInstance() = PopularMoviesFragment()
 
 

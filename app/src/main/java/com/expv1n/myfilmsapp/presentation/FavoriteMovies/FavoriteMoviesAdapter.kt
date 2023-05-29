@@ -1,6 +1,7 @@
 package com.expv1n.myfilmsapp.presentation.FavoriteMovies
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -36,6 +37,7 @@ class FavoriteMoviesAdapter :
                 val genre = movie.genre
                 val year = genre + "(" + movie.year + ")"
                 genreTextView.text = year
+                favoriteImageView.visibility = View.VISIBLE
             }
             holder.itemView.apply {
                 setOnClickListener { onClickListener?.invoke(movie) }

@@ -8,6 +8,9 @@ import androidx.lifecycle.ViewModel
 import com.expv1n.myfilmsapp.data.RepositoryImpl
 import com.expv1n.myfilmsapp.domain.usecase.GetDetailFilmUseCase
 import androidx.lifecycle.viewModelScope
+import com.expv1n.myfilmsapp.domain.models.MovieEntity
+import com.expv1n.myfilmsapp.domain.usecase.AddToFavoriteUseCase
+import com.expv1n.myfilmsapp.domain.usecase.DeleteFromFavoriteUseCase
 import com.expv1n.myfilmsapp.presentation.state.DetailError
 import com.expv1n.myfilmsapp.presentation.state.DetailProgress
 import com.expv1n.myfilmsapp.presentation.state.DetailResult
@@ -21,10 +24,24 @@ class DetailInfoViewModel(application: Application): AndroidViewModel(applicatio
 
     private val repository = RepositoryImpl(application)
     private val getDetailFilm = GetDetailFilmUseCase(repository)
+    private val addFavorite = AddToFavoriteUseCase(repository)
+    private val deleteFromFavorite = DeleteFromFavoriteUseCase(repository)
 
     private val _stateDetail = MutableLiveData<DetailState>()
     val stateDetail: LiveData<DetailState>
         get() = _stateDetail
+
+    fun addToFavorite(movie: MovieEntity) {
+        viewModelScope.launch {
+            addFavorite.invoke(movie)
+        }
+    }
+
+    fun deleteFromFavorite(movie: MovieEntity) {
+        viewModelScope.launch {
+            deleteFromFavorite.invoke(movie)
+        }
+    }
 
     fun getDetailInfo(filmId: Long) {
         _stateDetail.value = DetailProgress

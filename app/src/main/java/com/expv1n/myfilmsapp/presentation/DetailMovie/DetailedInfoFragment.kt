@@ -1,5 +1,6 @@
 package com.expv1n.myfilmsapp.presentation.DetailMovie
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,15 +10,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.expv1n.myfilmsapp.R
 import com.expv1n.myfilmsapp.databinding.FragmentDetailedInfoBinding
-import com.expv1n.myfilmsapp.domain.models.Country
 import com.expv1n.myfilmsapp.domain.models.Film
-import com.expv1n.myfilmsapp.domain.models.FilmDetail
-import com.expv1n.myfilmsapp.domain.models.Genre
+import com.expv1n.myfilmsapp.domain.models.MovieEntity
 import com.expv1n.myfilmsapp.presentation.PopularMovies.PopularMoviesFragment
 import com.expv1n.myfilmsapp.presentation.state.DetailError
 import com.expv1n.myfilmsapp.presentation.state.DetailProgress
 import com.expv1n.myfilmsapp.presentation.state.DetailResult
-import java.lang.StringBuilder
 
 // TODO room database and add favorite and delete
 class DetailedInfoFragment : Fragment() {
@@ -36,7 +34,7 @@ class DetailedInfoFragment : Fragment() {
     ): View {
         _binding = FragmentDetailedInfoBinding.inflate(layoutInflater, container, false)
         observeViewModel()
-        setOnClickListener()
+        buttonInit()
         return binding.root
     }
 
@@ -52,44 +50,16 @@ class DetailedInfoFragment : Fragment() {
         return -1
     }
 
-    private fun settingViewValue(movieDetails: FilmDetail) {
+    private fun settingViewValue(movieDetails: MovieEntity) {
         movieDetails.let {
             binding.apply {
                 Glide.with(requireActivity()).load(movieDetails.posterUrl).into(titleImageView)
-                titleMovieTextView.text = it.nameRu
+                titleMovieTextView.text = it.name
                 descriptionMovieTextView.text = it.description
-                genresMovieTextView.text = getGenres(it.genres)
-                countriesMovieTextView.text = getCountries(it.countries)
+                genresMovieTextView.text = it.genre
+                countriesMovieTextView.text = it.country
             }
         }
-    }
-
-    private fun getGenres(genres: List<Genre>): String {
-        val result = StringBuilder()
-        result.append("Жанры: ")
-        for ((i, tmp) in genres.withIndex()) {
-            result.append(tmp.genre)
-            if (i + 1 != genres.size) {
-                result.append(", ")
-            } else {
-                result.append(".")
-            }
-        }
-        return result.toString()
-    }
-
-    private fun getCountries(countries: List<Country>): String {
-        val result = StringBuilder()
-        result.append("Страны: ")
-        for ((i, tmp) in countries.withIndex()) {
-            result.append(tmp.country)
-            if (i + 1 != countries.size) {
-                result.append(", ")
-            } else {
-                result.append(".")
-            }
-        }
-        return result.toString()
     }
 
     private fun observeViewModel() {
@@ -109,6 +79,7 @@ class DetailedInfoFragment : Fragment() {
                 is DetailResult -> {
                     binding.progressBar.visibility = View.GONE
                     settingViewValue(it.result)
+                    isFavorite(it.result)
                 }
             }
         }
@@ -120,14 +91,36 @@ class DetailedInfoFragment : Fragment() {
             .commit()
     }
 
-    private fun setOnClickListener() {
+    // TODO add database and delete database
+    private fun isFavorite(movie: MovieEntity) {
+        if (movie.isFavorite) {
+            createFavoriteButton(R.drawable.trash, R.string.delete_is_favorite)
+            binding.addFavoriteButton.setOnClickListener {
+                viewModel.deleteFromFavorite(movie)
+            }
+        } else {
+            createFavoriteButton(R.drawable.likes, R.string.add_to_favorite)
+            binding.addFavoriteButton.setOnClickListener {
+                viewModel.addToFavorite(movie)
+            }
+        }
+    }
+
+    private fun createFavoriteButton(drawable: Int, text: Int) {
+        val icon = requireActivity().resources.getDrawable(drawable)
+        binding.addFavoriteButton.text = getString(text)
+        binding.addFavoriteButton.setCompoundDrawables(icon,
+            null, null, null)
+        binding.addFavoriteButton.visibility = View.VISIBLE
+    }
+
+    private fun buttonInit() {
         binding.backImageButton.setOnClickListener {
             launchFragment()
         }
     }
     companion object {
         const val PARSE_KEY = "DetailedInfoFragment"
-        const val FRAGMENT_NAME = "DetailedInfoFragment"
         fun getInstance(film: Film): DetailedInfoFragment {
             return DetailedInfoFragment().apply {
                 arguments = Bundle().apply {

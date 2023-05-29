@@ -9,6 +9,7 @@ import com.expv1n.myfilmsapp.data.api.ApiFactory
 import com.expv1n.myfilmsapp.data.database.MovieDatabase
 import com.expv1n.myfilmsapp.domain.Paging.MoviesPagingSource
 import com.expv1n.myfilmsapp.domain.Repository
+import com.expv1n.myfilmsapp.domain.mapper.MoviesMapper
 import com.expv1n.myfilmsapp.domain.models.Film
 import com.expv1n.myfilmsapp.domain.models.FilmDetail
 import com.expv1n.myfilmsapp.domain.models.MovieEntity
@@ -19,6 +20,8 @@ class RepositoryImpl(application: Application): Repository {
     val apiService = ApiFactory().apiService
 
     val database = MovieDatabase.getInstance(application)
+
+    val mapper = MoviesMapper()
 
     override suspend fun getPopularMovies(): Flow<PagingData<Film>> {
         return Pager(
@@ -48,8 +51,9 @@ class RepositoryImpl(application: Application): Repository {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getDetailFilm(filmId: Long): FilmDetail {
-        return apiService.getDetailFilm(id = filmId.toString())
+    override suspend fun getDetailMovie(movieId: Long): MovieEntity {
+        val response = apiService.getDetailFilm(id = movieId.toString())
+        return mapper.mapModelDtoToEntity(response)
     }
 
     override suspend fun deleteMovie(movie: MovieEntity) {
