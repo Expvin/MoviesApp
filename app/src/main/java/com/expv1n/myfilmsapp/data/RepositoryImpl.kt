@@ -44,7 +44,7 @@ class RepositoryImpl(application: Application): Repository {
     }
 
     override suspend fun addToFavoriteMovies(movie: MovieEntity) {
-        database.getDao().addMovie(movie)
+        database.getDao().addMovie(movie.copy(isFavorite = true))
     }
 
     override suspend fun searchMovies() {
@@ -57,7 +57,7 @@ class RepositoryImpl(application: Application): Repository {
     }
 
     override suspend fun deleteMovie(movie: MovieEntity) {
-        database.getDao().deleteMovie(movie)
+        database.getDao().deleteMovie(movie.copy(isFavorite = false))
     }
 
 }
