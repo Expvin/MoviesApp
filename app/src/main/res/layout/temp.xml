@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.DetailMovie.DetailedInfoFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:id="@+id/ln"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="20dp"
+            android:paddingStart="35dp"
+            android:paddingEnd="35dp">
+
+            <TextView
+                android:id="@+id/titleMovieTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                tools:text="Изгой-один: Звёздные войны"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/descriptionMovieTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                tools:text="@string/desmov"
+                android:textSize="14sp"
+                android:textColor="@color/my_text_color"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:id="@+id/genresMovieTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                tools:text="Жанры: фантастика, приключения"
+                android:textSize="14sp"
+                android:textColor="@color/my_text_color"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:id="@+id/countriesMovieTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                tools:text="Страны: США"
+                android:textSize="14sp"
+                android:textColor="@color/my_text_color"
+                android:layout_marginTop="16dp"/>
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/backImageButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/back_button"
+            android:background="@drawable/background_shape"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:backgroundTint="@color/my_blue"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/progress_bar_background"
+            android:visibility="visible"/>
+
+        <ImageView
+            android:id="@+id/errorImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/error_icon"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/errorTextView"
+            android:layout_width="280dp"
+            android:layout_height="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/errorImageView"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/error_text"
+            android:textSize="14sp"
+            android:textColor="@color/my_blue"
+            android:layout_marginTop="14dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/errorRepeatButton"
+            android:layout_width="124dp"
+            android:layout_height="45dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/errorTextView"
+            android:backgroundTint="@color/my_blue"
+            android:text="@string/error_repeat"
+            android:textAllCaps="false"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/button_background"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/addFavoriteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ln"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/my_favorite_btn"
+            android:text="@string/delete_is_favorite"
+            android:textAllCaps="false"
+            android:background="@drawable/favorite_button_background"
+            android:drawableLeft="@drawable/trash"
+            android:visibility="gone"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
