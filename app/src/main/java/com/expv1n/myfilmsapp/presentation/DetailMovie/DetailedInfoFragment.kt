@@ -108,10 +108,10 @@ class DetailedInfoFragment : Fragment() {
 
     private fun createFavoriteButton(drawable: Int, text: Int) {
         val icon = requireActivity().resources.getDrawable(drawable)
-        binding.addFavoriteButton.text = getString(text)
-        binding.addFavoriteButton.setCompoundDrawables(icon,
-            null, null, null)
-        binding.addFavoriteButton.visibility = View.VISIBLE
+//        binding.addFavoriteButton.text = getString(text)
+//        binding.addFavoriteButton.setCompoundDrawables(icon,
+//            null, null, null)
+//        binding.addFavoriteButton.visibility = View.VISIBLE
     }
 
     private fun buttonInit() {
